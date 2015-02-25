@@ -1,5 +1,13 @@
 set -e
 
+# check if MongoDB is bound via linking
+if ! [[ -z ${MONGO_NAME+x} ]]; then
+  # resolve name from /etc/hosts
+  MONGO_IP_ADDR=$(gethostip -d mongo)
+  # override MONGO_URL with the url from the linked container
+  export MONGO_URL=mongodb://$MONGO_IP_ADDR:27017/$DB_NAME
+fi
+
 if [ -d /bundle ]; then
   cd /bundle
   tar xzf *.tar.gz
