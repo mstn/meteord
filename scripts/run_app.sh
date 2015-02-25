@@ -5,7 +5,7 @@ if ! [[ -z ${MONGO_NAME+x} ]]; then
   # resolve name from /etc/hosts
   MONGO_IP_ADDR=$(gethostip -d mongo)
   # override MONGO_URL with the url from the linked container
-  export MONGO_URL=mongodb://$MONGO_IP_ADDR:27017/$DB_NAME
+  export MONGO_URL=mongodb://$MONGO_IP_ADDR:$DB_PORT/$DB_NAME
 fi
 
 if [ -d /bundle ]; then

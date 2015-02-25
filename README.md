@@ -46,6 +46,7 @@ You can also link a MongoDB container to your app container.
 docker run -d \
     --link <mongodb container name>:mongo
     -e DB_NAME=<db name>
+    -e DB_PORT=<db port within mongodb container>
     -e ROOT_URL=http://yourapp.com \
     -p 8080:80 \
     yourname/app
