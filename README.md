@@ -1,5 +1,5 @@
 [![Circle CI](https://circleci.com/gh/meteorhacks/meteord/tree/master.svg?style=svg)](https://circleci.com/gh/meteorhacks/meteord/tree/master)
-## MeteorD - Docker Runtime for Meteor Apps 
+## MeteorD - Docker Runtime for Meteor Apps
 
 There are two main ways you can use Docker with Meteor apps. They are:
 
@@ -35,10 +35,21 @@ docker run -d \
     -e MONGO_URL=mongodb://url \
     -e MONGO_OPLOG_URL=mongodb://oplog_url \
     -p 8080:80 \
-    yourname/app 
+    yourname/app
 ~~~
 
 Then you can access your app from the port 8080 of the host system.
+
+You can also link a MongoDB container to your app container.
+
+~~~shell
+docker run -d \
+    --link <mongodb container name>:mongo
+    -e DB_NAME=<db name>
+    -e ROOT_URL=http://yourapp.com \
+    -p 8080:80 \
+    yourname/app
+~~~
 
 ### 2. Running a Meteor bundle with Docker
 
