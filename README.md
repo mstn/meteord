@@ -41,6 +41,7 @@ docker run -d \
 Then you can access your app from the port 8080 of the host system.
 
 You can also link a MongoDB container to your app container.
+Note: oplog is not supported yet.
 
 ~~~shell
 docker run -d \
