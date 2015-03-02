@@ -41,7 +41,6 @@ docker run -d \
 Then you can access your app from the port 8080 of the host system.
 
 You can also link a MongoDB container to your app container.
-Note: oplog is not supported yet.
 
 ~~~shell
 docker run -d \
@@ -52,6 +51,22 @@ docker run -d \
     -p 8080:80 \
     yourname/app
 ~~~
+
+If your MongoDB container works with oplog, OPLOG_DB_NAME variable should be set.
+
+~~~shell
+docker run -d \
+    --link <mongodb container name>:mongo
+    -e OPLOG_DB_NAME=<oplog db name, e.g. local>
+    -e DB_NAME=<db name>
+    -e DB_PORT=<db port within mongodb container>
+    -e ROOT_URL=http://yourapp.com \
+    -p 8080:80 \
+    yourname/app
+~~~
+
+NOTE: I tested oplog only with a single replica set instance. See [here](https://medium.com/meteor-secret/adding-oplog-tailing-with-meteor-up-mup-and-ubuntu-efa644f397e9) for further details.
+
 
 ### 2. Running a Meteor bundle with Docker
 

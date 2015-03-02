@@ -6,6 +6,10 @@ if ! [[ -z ${MONGO_NAME+x} ]]; then
   MONGO_IP_ADDR=$(gethostip -d mongo)
   # override MONGO_URL with the url from the linked container
   export MONGO_URL=mongodb://$MONGO_IP_ADDR:$DB_PORT/$DB_NAME
+  # if user wants to use oplog, defined the corresponding variable
+  if ! [[ -z ${OPLOG_DB_NAME+x} ]]; then
+    export MONGO_OPLOG_URL=mongodb://$MONGO_IP_ADDR:$DB_PORT/$OPLOG_DB_NAME
+  fi
 fi
 
 if [ -d /bundle ]; then
